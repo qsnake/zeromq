@@ -1,7 +1,12 @@
 ACLOCAL_AMFLAGS = -I config
 
-SUBDIRS = src doc perf devices tests
-DIST_SUBDIRS = src doc perf devices tests builds/msvc
+if BUILD_PGM
+SUBDIRS = foreign/openpgm src doc perf tests
+else
+SUBDIRS = src doc perf tests
+endif
+
+DIST_SUBDIRS = foreign/openpgm src doc perf tests builds/msvc
 
 EXTRA_DIST = \
 	autogen.sh	\
@@ -31,8 +36,8 @@ dist-hook:
 	fi
 	-cp $(top_srcdir)/builds/redhat/zeromq.spec $(distdir)/zeromq.spec
 	-sed s/\@PACKAGE_VERSION\@/@PACKAGE_VERSION@/ -i $(distdir)/zeromq.spec
-	-rm -rf $(distdir)/foreign/openpgm/@pgm_basename@
+	-rm -rf $(distdir)/foreign/openpgm/build-staging
 distclean-local:
-	-rm -rf $(top_srcdir)/foreign/openpgm/@pgm_basename@
+	-rm -rf $(top_srcdir)/foreign/openpgm/build-staging
 maintainer-clean-local:
 	-rm -rf $(top_srcdir)/config
