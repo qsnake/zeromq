@@ -4,18 +4,19 @@
 Bug fixes
 ---------
 
+
 Changes
 -------
 
-* Duplicate identities now checked at connection time. A peer using a 
-  duplicate identity is disconnected and will retry after the 
+* Duplicate identities now checked at connection time. A peer using a
+  duplicate identity is disconnected and will retry after the
   ZMQ_RECONNECT_IVL, with backoff strategy.
-  
+
 * System error reporting bus, sys://log introduced.
 
 * Duplicate identities are logged to sys://log.
 
-* ZMQ_MAXMSGSIZE socket option added. This allows the node to guard 
+* ZMQ_MAXMSGSIZE socket option added. This allows the node to guard
   against peers sending oversized messages. If a peer sends an oversized
   message, the connection to that peer is dropped.
 
