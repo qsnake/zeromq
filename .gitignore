@@ -56,3 +56,4 @@ foreign/openpgm/*
 !foreign/openpgm/*.tar.gz
 zeromq-*.tar.gz
 zeromq-*.zip
+builds/redhat/zeromq.spec
