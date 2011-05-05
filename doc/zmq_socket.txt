@@ -48,7 +48,7 @@ _zmq_bind()_, thus allowing many-to-many relationships.
 
 .Thread safety
 0MQ 'sockets' are _not_ thread safe. Applications MUST NOT use a socket
-from multiple threads except after migrating a socket from one thread to 
+from multiple threads except after migrating a socket from one thread to
 another with a "full fence" memory barrier.
 
 .Socket types
@@ -176,6 +176,33 @@ Incoming routing strategy:: Fair-queued
 ZMQ_HWM option action:: Drop
 
 
+ZMQ_PATCH
+^^^^^^^^^
+A socket of type 'ZMQ_PATCH' is an advanced pattern used for extending
+request/reply sockets. Each message sent is distributed in a fan out fashion
+to all connected peers, and each message received is fair-queued from all
+connected peers.
+
+When a 'ZMQ_PATCH' socket enters an exceptional state due to having reached the
+high water mark for all peers, or if there are no peers at all, then any
+linkzmq:zmq_send[3] operations on the socket shall block until the exceptional
+state ends or at least one peer becomes available for sending; messages are not
+discarded.
+
+When a 'ZMQ_PATCH' socket is connected to a 'ZMQ_REP' socket each message sent
+must consist of an empty message part, the _delimiter_, followed by one or more
+_body parts_.
+
+[horizontal]
+.Summary of ZMQ_PATCH characteristics
+Compatible peer sockets:: 'ZMQ_PATCH', 'ZMQ_ROUTER', 'ZMQ_REP'
+Direction:: Bidirectional
+Send/receive pattern:: Unrestricted
+Outgoing routing strategy:: Load-balanced
+Outgoing routing strategy:: Fan out
+ZMQ_HWM option action:: Drop
+
+
 Publish-subscribe pattern
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 The publish-subscribe pattern is used for one-to-many distribution of data from
@@ -292,7 +319,7 @@ any linkzmq:zmq_send[3] operations on the socket shall block until the peer
 becomes available for sending; messages are not discarded.
 
 NOTE: 'ZMQ_PAIR' sockets are designed for inter-thread communication across
-the linkzmq:zmq_inproc[7] transport and do not implement functionality such 
+the linkzmq:zmq_inproc[7] transport and do not implement functionality such
 as auto-reconnection. 'ZMQ_PAIR' sockets are considered experimental and may
 have other missing or broken aspects.
 
