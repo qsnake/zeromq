@@ -19,6 +19,7 @@ libzmq_la_SOURCES = \
     device.hpp \
     devpoll.hpp \
     dist.hpp \
+    patch.hpp \
     encoder.hpp \
     epoll.hpp \
     err.hpp \
@@ -114,6 +115,7 @@ libzmq_la_SOURCES = \
     push.cpp \
     reaper.cpp \
     pub.cpp \
+    patch.cpp \
     rep.cpp \
     req.cpp \
     select.cpp \

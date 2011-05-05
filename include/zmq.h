@@ -182,6 +182,7 @@ ZMQ_EXPORT int zmq_term (void *context);
 #define ZMQ_PUSH 8
 #define ZMQ_XPUB 9
 #define ZMQ_XSUB 10
+#define ZMQ_PATCH 11
 #define ZMQ_XREQ ZMQ_DEALER        /*  Old alias, remove in 3.x               */
 #define ZMQ_XREP ZMQ_ROUTER        /*  Old alias, remove in 3.x               */
 #define ZMQ_UPSTREAM ZMQ_PULL      /*  Old alias, remove in 3.x               */
