@@ -10,6 +10,6 @@ fi
 set -e
 
 unset RM
-./configure --prefix="$SPKG_LOCAL"
+CPPFLAGS="-I$SPKG_LOCAL/include" ./configure --prefix="$SPKG_LOCAL"
 make
 make install
