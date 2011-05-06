@@ -1,0 +1,15 @@
+#! /bin/sh
+
+if [ "$SPKG_LOCAL" = "" ]; then
+   echo "SPKG_LOCAL undefined ... exiting";
+   echo "Maybe run 'qsnake --shell'?"
+   exit 1
+fi
+
+
+set -e
+
+unset RM
+./configure --prefix="$SPKG_LOCAL"
+make
+make install
